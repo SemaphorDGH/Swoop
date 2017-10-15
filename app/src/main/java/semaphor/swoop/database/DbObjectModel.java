@@ -11,7 +11,7 @@ public class DbObjectModel {
     public DbObjectModel(String word, String meaning) {
 
         this.word = word;
-        this.meaning = meaning;
+        this.mceaning = meaning;
 
 
     }
