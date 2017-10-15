@@ -22,7 +22,7 @@ public class SwoopDbHelper extends SQLiteOpenHelper {
     //The Android's default system path of your application database.
     private static String DB_PATH = "";
 
-    private static String DB_NAME = "dictionary.db";
+    private static String DB_NAME = "swoopdb.db";
 
     private SQLiteDatabase myDataBase;
 
