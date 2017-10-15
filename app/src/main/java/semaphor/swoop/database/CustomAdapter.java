@@ -1,4 +1,4 @@
-package semaphor.swoop;
+package semaphor.swoop.database;
 
 /**
  * Created by derek-w on 10/14/17.
@@ -13,6 +13,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import semaphor.swoop.R;
 
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {

@@ -1,4 +1,4 @@
-package semaphor.swoop;
+package semaphor.swoop.database;
 
 /**
  * Created by derek-w on 10/14/17.

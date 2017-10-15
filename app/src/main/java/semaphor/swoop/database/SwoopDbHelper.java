@@ -1,4 +1,4 @@
-package semaphor.swoop;
+package semaphor.swoop.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
