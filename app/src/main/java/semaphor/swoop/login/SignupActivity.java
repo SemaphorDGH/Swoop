@@ -1,4 +1,4 @@
-package semaphor.swoop.SwoopLogin;
+package semaphor.swoop.login;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
