@@ -10,16 +10,16 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import com.f22labs.SwoopBottomBar.R;
-import com.f22labs.SwoopBottomBar.fragments.BaseFragment;
-import com.f22labs.SwoopBottomBar.fragments.HomeFragment;
-import com.f22labs.SwoopBottomBar.fragments.NewsFragment;
-import com.f22labs.SwoopBottomBar.fragments.ProfileFragment;
-import com.f22labs.SwoopBottomBar.fragments.SearchFragment;
-import com.f22labs.SwoopBottomBar.fragments.ShareFragment;
-import com.f22labs.SwoopBottomBar.utils.FragmentHistory;
-import com.f22labs.SwoopBottomBar.utils.Utils;
-import com.f22labs.SwoopBottomBar.views.FragNavController;
+import semaphor.swoop.R;
+import semaphor.swoop.fragments.BaseFragment;
+import semaphor.swoop.fragments.HomeFragment;
+import semaphor.swoop.fragments.NewsFragment;
+import semaphor.swoop.fragments.ProfileFragment;
+import semaphor.swoop.fragments.SearchFragment;
+import semaphor.swoop.fragments.ShareFragment;
+import semaphor.swoop.utils.FragmentHistory;
+import semaphor.swoop.utils.Utils;
+import semaphor.swoop.views.FragNavController;
 
 import butterknife.BindArray;
 import butterknife.BindView;

@@ -5,7 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
-import com.f22labs.SwoopBottomBar.R;
+import semaphor.swoop.R;
 
 
 /**
