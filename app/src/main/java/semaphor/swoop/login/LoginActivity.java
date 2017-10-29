@@ -86,11 +86,13 @@ public class LoginActivity extends AppCompatActivity {
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
-                        if(CURRENTUSER != null && CURRENTUSER.getPassword().equals(password))
-                        // On complete call either onLoginSuccess or onLoginFailed
-                        onLoginSuccess();
-                        // onLoginFailed();
-                        progressDialog.dismiss();
+                        if(CURRENTUSER != null && CURRENTUSER.getPassword().equals(password)) {
+                            // On complete call either onLoginSuccess or onLoginFailed
+                            onLoginSuccess();
+                        }else {
+                            // onLoginFailed();
+                            progressDialog.dismiss();
+                        }
                     }
                 }, 3000);
     }
@@ -116,6 +118,8 @@ public class LoginActivity extends AppCompatActivity {
 
     public void onLoginSuccess() {
         _loginButton.setEnabled(true);
+        Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
+        startActivityForResult(intent, REQUEST_SIGNUP);
         finish();
     }
 
