@@ -1,8 +1,9 @@
-package semaphor.swoop.SwoopLogin;
+package semaphor.swoop.activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -11,27 +12,28 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import semaphor.swoop.R;
 
 public class SignupActivity extends AppCompatActivity {
     private static final String TAG = "SignupActivity";
 
-    @Bind(R.id.input_name)
-    EditText _nameText;
-    @Bind(R.id.input_address)
-    EditText _addressText;
-    @Bind(R.id.input_email)
-    EditText _emailText;
-    @Bind(R.id.input_mobile)
-    EditText _mobileText;
-    @Bind(R.id.input_password)
-    EditText _passwordText;
-    @Bind(R.id.input_reEnterPassword)
-    EditText _reEnterPasswordText;
-    @Bind(R.id.btn_signup)
+    @BindView(R.id.input_name)
+    TextInputEditText _nameText;
+    @BindView(R.id.input_address)
+    TextInputEditText _addressText;
+    @BindView(R.id.input_email)
+    TextInputEditText _emailText;
+    @BindView(R.id.input_mobile)
+    TextInputEditText _mobileText;
+    @BindView(R.id.input_password)
+    TextInputEditText _passwordText;
+    @BindView(R.id.input_reEnterPassword)
+    TextInputEditText _reEnterPasswordText;
+    @BindView(R.id.btn_signup)
     Button _signupButton;
-    @Bind(R.id.link_login)
+    @BindView(R.id.link_login)
     TextView _loginLink;
     
     @Override

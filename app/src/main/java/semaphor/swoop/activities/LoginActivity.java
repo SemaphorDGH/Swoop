@@ -1,8 +1,9 @@
-package semaphor.swoop.SwoopLogin;
+package semaphor.swoop.activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -11,28 +12,31 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import semaphor.swoop.R;
+import semaphor.swoop.database.UserModel;
+import semaphor.swoop.database.UsersDatabaseHandler;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
+    private UserModel CURRENTUSER = new UserModel();
+    private UsersDatabaseHandler CURRENTDB;
 
-    @Bind(R.id.input_email)
-    EditText _emailText;
-    @Bind(R.id.input_password)
-    EditText _passwordText;
-    @Bind(R.id.btn_login)
-    Button _loginButton;
-    @Bind(R.id.link_signup)
-    TextView _signupLink;
+    @BindView(R.id.input_email) TextInputEditText _emailText;
+    @BindView(R.id.input_password) TextInputEditText _passwordText;
+    @BindView(R.id.btn_login) Button _loginButton;
+    @BindView(R.id.link_signup) TextView _signupLink;
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-        
+        //CURRENTDB = new UsersDatabaseHandler(this);
+
         _loginButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -57,10 +61,10 @@ public class LoginActivity extends AppCompatActivity {
     public void login() {
         Log.d(TAG, "Login");
 
-        if (!validate()) {
-            onLoginFailed();
-            return;
-        }
+//        if (!validate()) {
+//            onLoginFailed();
+//            return;
+//        }
 
         _loginButton.setEnabled(false);
 
@@ -70,18 +74,25 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setMessage("Authenticating...");
         progressDialog.show();
 
-        String email = _emailText.getText().toString();
-        String password = _passwordText.getText().toString();
+        // create user
+       // CURRENTUSER = CURRENTDB.getUser();
+        String username = _emailText.getText().toString();
+        final String password = _passwordText.getText().toString();
 
         // TODO: Implement authentication logic here.
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
-                        // On complete call either onLoginSuccess or onLoginFailed
-                        onLoginSuccess();
-                        // onLoginFailed();
-                        progressDialog.dismiss();
+                        String password = _passwordText.getText().toString();
+                        if(true){
+                            //CURRENTUSER != null && CURRENTUSER.getPassword().equals(password)) {
+                            // On complete call either onLoginSuccess or onLoginFailed
+                            onLoginSuccess();
+                        }else {
+                            // onLoginFailed();
+                            progressDialog.dismiss();
+                        }
                     }
                 }, 3000);
     }
@@ -101,17 +112,19 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        // Disable going back to the MainActivity
+        // Disable going back to the HomeActivity
         moveTaskToBack(true);
     }
 
     public void onLoginSuccess() {
         _loginButton.setEnabled(true);
+        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
         finish();
+        startActivity(intent);
     }
 
     public void onLoginFailed() {
-        Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
+        Toast.makeText(getBaseContext(), "username&password don't match", Toast.LENGTH_LONG).show();
 
         _loginButton.setEnabled(true);
     }

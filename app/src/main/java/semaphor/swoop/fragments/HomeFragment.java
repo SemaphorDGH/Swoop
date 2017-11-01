@@ -7,8 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.f22labs.SwoopBottomBar.R;
-import com.f22labs.SwoopBottomBar.activities.MainActivity;
+import semaphor.swoop.R;
+import semaphor.swoop.activities.HomeActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -79,7 +79,7 @@ public class HomeFragment extends BaseFragment {
         });
 
 
-        ( (MainActivity)getActivity()).updateToolbarTitle((fragCount == 0) ? "Home" : "Sub Home "+fragCount);
+        ( (HomeActivity)getActivity()).updateToolbarTitle((fragCount == 0) ? "Home" : "Sub Home "+fragCount);
 
     }
 

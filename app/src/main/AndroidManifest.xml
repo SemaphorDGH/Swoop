@@ -5,17 +5,22 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:label="swoop"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name="semaphor.swoop.activities.LoginActivity"
+            android:theme="@style/AppTheme.Dark">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="semaphor.swoop.activities.SignupActivity" android:theme="@style/AppTheme.Dark" />   `
+        <activity android:name=".activities.HomeActivity"  android:theme ="@style/AppTheme1"/>
+        <!--
+        <activity android:name=".activities.HomeActivity" android:noHistory="true"/>
         <activity android:name=".database.SqliteTest">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,6 +28,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        -->
     </application>
 
 </manifest>
