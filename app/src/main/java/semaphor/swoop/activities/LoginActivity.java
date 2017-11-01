@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-        //CURRENTDB = new UsersDatabaseHandler(this);
+        CURRENTDB = new UsersDatabaseHandler(this);
 
         _loginButton.setOnClickListener(new View.OnClickListener() {
 
@@ -75,8 +75,8 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.show();
 
         // create user
-       // CURRENTUSER = CURRENTDB.getUser();
         String username = _emailText.getText().toString();
+        CURRENTUSER = CURRENTDB.getUserByUsername(username);
         final String password = _passwordText.getText().toString();
 
         // TODO: Implement authentication logic here.
@@ -86,7 +86,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void run() {
                         String password = _passwordText.getText().toString();
                         if(true){
-                            //CURRENTUSER != null && CURRENTUSER.getPassword().equals(password)) {
+                        // CURRENTUSER != null && CURRENTUSER.getPassword().equals(password)) {
                             // On complete call either onLoginSuccess or onLoginFailed
                             onLoginSuccess();
                         }else {
