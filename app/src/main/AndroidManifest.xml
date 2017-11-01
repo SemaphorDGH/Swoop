@@ -17,11 +17,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="semaphor.swoop.activities.LoginActivity" android:theme="@style/AppTheme.Dark" />
-        <activity android:name="semaphor.swoop.activities.SignupActivity" android:theme="@style/AppTheme.Dark"
+        <activity android:name="semaphor.swoop.activities.LoginActivity" android:theme="@style/AppTheme.Dark"
             android:noHistory="true"/>
+        <activity android:name="semaphor.swoop.activities.SignupActivity" android:theme="@style/AppTheme.Dark" />
+        <activity android:name=".activities.HomeActivity" android:noHistory="true"/>
         <!--
-        <activity android:name=".activities.HomeActivity"/>
         <activity android:name=".database.SqliteTest">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
