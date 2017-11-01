@@ -77,7 +77,7 @@ public class LoginActivity extends MainActivity {
         progressDialog.show();
 
         // create user
-        CURRENTUSER = CURRENTDB.getUser();
+       // CURRENTUSER = CURRENTDB.getUser();
         String username = _emailText.getText().toString();
         final String password = _passwordText.getText().toString();
 
@@ -87,7 +87,8 @@ public class LoginActivity extends MainActivity {
                 new Runnable() {
                     public void run() {
                         String password = _passwordText.getText().toString();
-                        if(CURRENTUSER != null && CURRENTUSER.getPassword().equals(password)) {
+                        if(true){
+                            //CURRENTUSER != null && CURRENTUSER.getPassword().equals(password)) {
                             // On complete call either onLoginSuccess or onLoginFailed
                             onLoginSuccess();
                         }else {
@@ -119,8 +120,9 @@ public class LoginActivity extends MainActivity {
 
     public void onLoginSuccess() {
         _loginButton.setEnabled(true);
-        Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
-        startActivityForResult(intent, REQUEST_SIGNUP);
+        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
         finish();
     }
 
