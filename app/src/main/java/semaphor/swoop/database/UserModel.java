@@ -6,7 +6,8 @@ package semaphor.swoop.database;
 
 public class UserModel {
     private int id;
-    private String username, password, followID, fanID;
+    private String username, password;
+    private String[] followIDs, fanIDs;
 
     // Empty constructor
     public UserModel() {
@@ -27,20 +28,20 @@ public class UserModel {
     }
 
     // Constructor with full data model
-    public UserModel(int id, String username, String password, String fanID, String followID) {
+    public UserModel(int id, String username, String password, String fanIDs, String followIDs) {
         this.id = id;
         this.username = username;
         this.password = password;
-        this.fanID = fanID;
-        this.followID = followID;
+        this.fanIDs = fanIDs.split(";");
+        this.followIDs = followIDs.split(";");
     }
 
     // Constructor with full data model without id
-    public UserModel(String username, String password, String fanID, String followID) {
+    public UserModel(String username, String password, String fanIDs, String followIDs) {
         this.username = username;
         this.password = password;
-        this.fanID = fanID;
-        this.followID = followID;
+        this.fanIDs = fanIDs.split(";");
+        this.followIDs = followIDs.split(";");
     }
 
     // Get id
@@ -71,22 +72,48 @@ public class UserModel {
     }
 
     // Get fan ids
-    public String getFanID() {
-        return this.fanID;
+    public String[] getArrayFanIDs() {
+        return this.fanIDs;
+    }
+
+    public String getStringFanIDs() {
+        String fanIDs = "";
+        int n = this.fanIDs.length;
+        for (int i = 0; i < n; i++) {
+            if (i == n - 1) {
+                fanIDs += this.fanIDs[i];
+            } else {
+                fanIDs += this.fanIDs[i] + ";";
+            }
+        }
+        return fanIDs;
     }
 
     // Set fan ids
-    public void setFanID(String fanID) {
-        this.fanID = fanID;
+    public void setFanIDs(String fanIDs) {
+        this.fanIDs = fanIDs.split(";");
     }
 
     // Get follow ids
-    public String getFollowID() {
-        return this.followID;
+    public String[] getArrayFollowIDs() {
+        return this.followIDs;
+    }
+
+    public String getStringFollowIDs() {
+        String followIDs = "";
+        int n = this.fanIDs.length;
+        for (int i = 0; i < n; i++) {
+            if (i == n - 1) {
+                followIDs += this.followIDs[i];
+            } else {
+                followIDs += this.followIDs[i] + ";";
+            }
+        }
+        return followIDs;
     }
 
     // Set follow ids
-    public void setFollowID(String followID) {
-        this.followID = followID;
+    public void setFollowIDs(String followIDs) {
+        this.followIDs = followIDs.split(";");
     }
 }

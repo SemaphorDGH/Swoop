@@ -2,7 +2,7 @@ BEGIN TRANSACTION;
 CREATE TABLE "usersdb" (
 	`_id`	INTEGER PRIMARY KEY AUTOINCREMENT,
 	`username`	TEXT,
-	`password`	TEXT,
+	`textQuestion`	TEXT,
 	`followIds`	TEXT,
 	`fanIds`	TEXT
 );
