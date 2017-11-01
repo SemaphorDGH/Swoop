@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import semaphor.swoop.R;
-import semaphor.swoop.activities.MainActivity;
+import semaphor.swoop.activities.HomeActivity;
 
 import butterknife.ButterKnife;
 
@@ -29,7 +29,7 @@ public class SearchFragment extends BaseFragment{
 
         ButterKnife.bind(this, view);
 
-        ( (MainActivity)getActivity()).updateToolbarTitle("Search");
+        ( (HomeActivity)getActivity()).updateToolbarTitle("Search");
 
 
         return view;

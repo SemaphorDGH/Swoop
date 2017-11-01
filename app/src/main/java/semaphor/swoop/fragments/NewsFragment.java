@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import semaphor.swoop.R;
-import semaphor.swoop.activities.MainActivity;
+import semaphor.swoop.activities.HomeActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -76,7 +76,7 @@ public class NewsFragment extends BaseFragment{
         });
 
 
-        ( (MainActivity)getActivity()).updateToolbarTitle((fragCount == 0) ? "News" : "Sub News "+fragCount);
+        ( (HomeActivity)getActivity()).updateToolbarTitle((fragCount == 0) ? "News" : "Sub News "+fragCount);
 
 
     }

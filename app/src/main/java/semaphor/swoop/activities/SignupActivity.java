@@ -1,4 +1,4 @@
-package semaphor.swoop.login;
+package semaphor.swoop.activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -15,7 +15,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import semaphor.swoop.R;
 
-public class SignupActivity extends AppCompatActivity {
+public class SignupActivity extends MainActivity {
     private static final String TAG = "SignupActivity";
 
     @BindView(R.id.input_name)

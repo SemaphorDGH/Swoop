@@ -1,4 +1,4 @@
-package semaphor.swoop.login;
+package semaphor.swoop.activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -17,7 +17,7 @@ import semaphor.swoop.R;
 import semaphor.swoop.database.UserModel;
 import semaphor.swoop.database.UsersDatabaseHandler;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends MainActivity {
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
     private UserModel CURRENTUSER = new UserModel();
@@ -76,16 +76,17 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setMessage("Authenticating...");
         progressDialog.show();
 
+        // create user
         CURRENTUSER = CURRENTDB.getUser();
         String username = _emailText.getText().toString();
         final String password = _passwordText.getText().toString();
-        CURRENTUSER = CURRENTDB.getUser(username);
 
         // TODO: Implement authentication logic here.
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
+                        String password = _passwordText.getText().toString();
                         if(CURRENTUSER != null && CURRENTUSER.getPassword().equals(password)) {
                             // On complete call either onLoginSuccess or onLoginFailed
                             onLoginSuccess();
@@ -112,7 +113,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        // Disable going back to the MainActivity
+        // Disable going back to the HomeActivity
         moveTaskToBack(true);
     }
 
