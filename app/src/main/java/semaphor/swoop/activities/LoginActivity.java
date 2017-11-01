@@ -33,7 +33,7 @@ public class LoginActivity extends MainActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-        CURRENTDB = new UsersDatabaseHandler(this);
+        //CURRENTDB = new UsersDatabaseHandler(this);
 
         _loginButton.setOnClickListener(new View.OnClickListener() {
 
