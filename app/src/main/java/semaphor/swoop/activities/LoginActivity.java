@@ -17,7 +17,7 @@ import semaphor.swoop.R;
 import semaphor.swoop.database.UserModel;
 import semaphor.swoop.database.UsersDatabaseHandler;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends MainActivity {
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
     private UserModel CURRENTUSER = new UserModel();
