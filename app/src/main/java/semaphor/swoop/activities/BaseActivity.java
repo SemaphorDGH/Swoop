@@ -1,16 +1,17 @@
 package semaphor.swoop.activities;
 
+import semaphor.swoop.R;
+import semaphor.swoop.activities.LoginActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 
-import com.f22labs.SwoopBottomBar.R;
 
-
-/**
- * Created by f22labs on 07/03/17.
- */
 
 public class BaseActivity extends AppCompatActivity {
 
@@ -47,8 +48,4 @@ public class BaseActivity extends AppCompatActivity {
 
 
     }
-
-
-
-
 }

@@ -10,22 +10,22 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import com.f22labs.SwoopBottomBar.R;
-import com.f22labs.SwoopBottomBar.fragments.BaseFragment;
-import com.f22labs.SwoopBottomBar.fragments.HomeFragment;
-import com.f22labs.SwoopBottomBar.fragments.NewsFragment;
-import com.f22labs.SwoopBottomBar.fragments.ProfileFragment;
-import com.f22labs.SwoopBottomBar.fragments.SearchFragment;
-import com.f22labs.SwoopBottomBar.fragments.ShareFragment;
-import com.f22labs.SwoopBottomBar.utils.FragmentHistory;
-import com.f22labs.SwoopBottomBar.utils.Utils;
-import com.f22labs.SwoopBottomBar.views.FragNavController;
+import semaphor.swoop.R;
+import semaphor.swoop.fragments.BaseFragment;
+import semaphor.swoop.fragments.HomeFragment;
+import semaphor.swoop.fragments.NewsFragment;
+import semaphor.swoop.fragments.ProfileFragment;
+import semaphor.swoop.fragments.SearchFragment;
+import semaphor.swoop.fragments.ShareFragment;
+import semaphor.swoop.utils.FragmentHistory;
+import semaphor.swoop.utils.Utils;
+import semaphor.swoop.views.FragNavController;
 
 import butterknife.BindArray;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends BaseActivity implements BaseFragment.FragmentNavigation, FragNavController.TransactionListener, FragNavController.RootFragmentListener {
+public class HomeActivity extends BaseActivity implements BaseFragment.FragmentNavigation, FragNavController.TransactionListener, FragNavController.RootFragmentListener {
 
 
     @BindView(R.id.content_frame)
@@ -55,7 +55,7 @@ public class MainActivity extends BaseActivity implements BaseFragment.FragmentN
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_home);
 
 
         ButterKnife.bind(this);
@@ -108,7 +108,6 @@ public class MainActivity extends BaseActivity implements BaseFragment.FragmentN
     private void initToolbar() {
         setSupportActionBar(toolbar);
 
-
     }
 
     private void initTab() {
@@ -124,9 +123,9 @@ public class MainActivity extends BaseActivity implements BaseFragment.FragmentN
 
 
     private View getTabView(int position) {
-        View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.tab_item_bottom, null);
+        View view = LayoutInflater.from(HomeActivity.this).inflate(R.layout.tab_item_bottom, null);
         ImageView icon = (ImageView) view.findViewById(R.id.tab_icon);
-        icon.setImageDrawable(Utils.setDrawableSelector(MainActivity.this, mTabIconsSelected[position], mTabIconsSelected[position]));
+        icon.setImageDrawable(Utils.setDrawableSelector(HomeActivity.this, mTabIconsSelected[position], mTabIconsSelected[position]));
         return view;
     }
 

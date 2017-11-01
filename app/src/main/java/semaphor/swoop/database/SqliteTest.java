@@ -17,7 +17,7 @@ public class SqliteTest extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_home);
 
         UsersDatabaseHandler users = new UsersDatabaseHandler(this);
         // Deleting all users
