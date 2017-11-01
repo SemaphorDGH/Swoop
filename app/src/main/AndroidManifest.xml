@@ -5,6 +5,8 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
         android:label="swoop"
         android:theme="@style/AppTheme">
         <activity android:name="semaphor.swoop.activities.LoginActivity"
@@ -16,7 +18,7 @@
             </intent-filter>
         </activity>
         <activity android:name="semaphor.swoop.activities.SignupActivity" android:theme="@style/AppTheme.Dark" />   `
-        <activity android:name=".activities.HomeActivity" />
+        <activity android:name=".activities.HomeActivity"  android:theme ="@style/AppTheme1"/>
         <!--
         <activity android:name=".activities.HomeActivity" android:noHistory="true"/>
         <activity android:name=".database.SqliteTest">

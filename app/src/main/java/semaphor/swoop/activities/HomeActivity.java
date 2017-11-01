@@ -108,7 +108,6 @@ public class HomeActivity extends BaseActivity implements BaseFragment.FragmentN
     private void initToolbar() {
         setSupportActionBar(toolbar);
 
-
     }
 
     private void initTab() {

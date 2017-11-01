@@ -32,9 +32,9 @@ public class SignupActivity extends AppCompatActivity {
     @BindView(R.id.input_reEnterPassword)
     TextInputEditText _reEnterPasswordText;
     @BindView(R.id.btn_signup)
-    TextInputEditText _signupButton;
+    Button _signupButton;
     @BindView(R.id.link_login)
-    TextInputEditText _loginLink;
+    TextView _loginLink;
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
