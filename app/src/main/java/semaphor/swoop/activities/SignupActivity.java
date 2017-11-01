@@ -15,7 +15,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import semaphor.swoop.R;
 
-public class SignupActivity extends MainActivity {
+public class SignupActivity extends AppCompatActivity {
     private static final String TAG = "SignupActivity";
 
     @BindView(R.id.input_name)
