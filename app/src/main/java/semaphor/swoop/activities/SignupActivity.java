@@ -3,6 +3,7 @@ package semaphor.swoop.activities;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -19,21 +20,21 @@ public class SignupActivity extends AppCompatActivity {
     private static final String TAG = "SignupActivity";
 
     @BindView(R.id.input_name)
-    EditText _nameText;
+    TextInputEditText _nameText;
     @BindView(R.id.input_address)
-    EditText _addressText;
+    TextInputEditText _addressText;
     @BindView(R.id.input_email)
-    EditText _emailText;
+    TextInputEditText _emailText;
     @BindView(R.id.input_mobile)
-    EditText _mobileText;
+    TextInputEditText _mobileText;
     @BindView(R.id.input_password)
-    EditText _passwordText;
+    TextInputEditText _passwordText;
     @BindView(R.id.input_reEnterPassword)
-    EditText _reEnterPasswordText;
+    TextInputEditText _reEnterPasswordText;
     @BindView(R.id.btn_signup)
-    Button _signupButton;
+    TextInputEditText _signupButton;
     @BindView(R.id.link_login)
-    TextView _loginLink;
+    TextInputEditText _loginLink;
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
