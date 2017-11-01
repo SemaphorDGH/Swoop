@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * Created by hungnguyen on 10/21/2017.
@@ -60,25 +59,39 @@ public class UsersDatabaseHandler extends SQLiteOpenHelper {
     public void addUser(UserModel user) {
         SQLiteDatabase db = this.getWritableDatabase();
 
-        Random r = new Random();
         ContentValues values = new ContentValues();
-        values.put(COLUMN_ID, Math.abs(r.nextInt())); // id
+        values.put(COLUMN_ID, user.getID()); // id
         values.put(COLUMN_USERNAME, user.getUsername()); // username
         values.put(COLUMN_PASSWORD, user.getPassword()); // password
-        values.put(COLUMN_FAN_ID, user.getFanID()); // fan ids
-        values.put(COLUMN_FOLLOW_ID, user.getFollowID()); // follow ids
+        values.put(COLUMN_FAN_ID, user.getStringFanIDs()); // fan ids
+        values.put(COLUMN_FOLLOW_ID, user.getStringFollowIDs()); // follow ids
 
         // Inserting row
         db.insert(TABLE_USERS, null, values);
         db.close(); // Closing database connection
     }
 
-    // Getting single user
-    public UserModel getUser(int id) {
+    // Getting single user by id
+    public UserModel getUserByID(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_USERS, new String[] { COLUMN_ID, COLUMN_USERNAME, COLUMN_PASSWORD, COLUMN_FAN_ID, COLUMN_FOLLOW_ID },
                 COLUMN_ID + "=?", new String[] { String.valueOf(id) }, null, null, null, null);
+        if (cursor != null) {
+            cursor.moveToFirst();
+        }
+        UserModel user = new UserModel(cursor.getInt(0), cursor.getString(1),
+                cursor.getString(2), cursor.getString(3), cursor.getString(4));
+
+        return user;
+    }
+
+    // Getting single user by username
+    public UserModel getUserByUsername(String username) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_USERS, new String[] { COLUMN_ID, COLUMN_USERNAME, COLUMN_PASSWORD, COLUMN_FAN_ID, COLUMN_FOLLOW_ID },
+                COLUMN_USERNAME + "=?", new String[] { username }, null, null, null, null);
         if (cursor != null) {
             cursor.moveToFirst();
         }
@@ -127,8 +140,8 @@ public class UsersDatabaseHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(COLUMN_USERNAME, user.getUsername()); // username
         values.put(COLUMN_PASSWORD, user.getPassword()); // password
-        values.put(COLUMN_FAN_ID, user.getFanID()); // fan ids
-        values.put(COLUMN_FOLLOW_ID, user.getFollowID()); // follow ids
+        values.put(COLUMN_FAN_ID, user.getStringFanIDs()); // fan ids
+        values.put(COLUMN_FOLLOW_ID, user.getStringFollowIDs()); // follow ids
 
         // Updating row
         return db.update(TABLE_USERS, values, COLUMN_ID + "=?", new String[]{ String.valueOf(user.getID())});
