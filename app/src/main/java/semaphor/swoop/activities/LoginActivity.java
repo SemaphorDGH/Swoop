@@ -75,8 +75,8 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.show();
 
         // create user
-       // CURRENTUSER = CURRENTDB.getUser();
         String username = _emailText.getText().toString();
+        //CURRENTUSER = CURRENTDB.getUserByUsername(username);
         final String password = _passwordText.getText().toString();
 
         // TODO: Implement authentication logic here.
@@ -86,7 +86,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void run() {
                         String password = _passwordText.getText().toString();
                         if(true){
-                            //CURRENTUSER != null && CURRENTUSER.getPassword().equals(password)) {
+                        // CURRENTUSER != null && CURRENTUSER.getPassword().equals(password)) {
                             // On complete call either onLoginSuccess or onLoginFailed
                             onLoginSuccess();
                         }else {
@@ -119,6 +119,7 @@ public class LoginActivity extends AppCompatActivity {
     public void onLoginSuccess() {
         _loginButton.setEnabled(true);
         Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+        intent.putExtra("CURRENT_USERID", CURRENTUSER.getID() );
         finish();
         startActivity(intent);
     }

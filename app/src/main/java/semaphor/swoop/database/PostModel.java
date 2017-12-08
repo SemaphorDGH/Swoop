@@ -4,7 +4,7 @@ package semaphor.swoop.database;
  * Created by hungnguyen on 10/21/2017.
  */
 
-public class PostModel {
+public class    PostModel {
     private int id;
     private String[] textAnswer;
     private String username, textQuestion, date;
