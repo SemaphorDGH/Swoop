@@ -57,6 +57,7 @@ public class HomeActivity extends BaseActivity implements BaseFragment.FragmentN
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        int CURRENT_USERID = getIntent().getIntExtra("CURRENT_USERID", 0);
 
         ButterKnife.bind(this);
 
