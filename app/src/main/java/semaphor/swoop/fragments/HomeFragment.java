@@ -6,22 +6,29 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ListView;
 
 import semaphor.swoop.R;
 import semaphor.swoop.activities.HomeActivity;
 
+import android.widget.AdapterView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import semaphor.swoop.database.PostModel;
 
 
 public class HomeFragment extends BaseFragment {
-
-
-    @BindView(R.id.btn_click_me)
-    Button btnClickMe;
+    private List<PostModel> posts;
+    private PostListAdapter adapter;
+    private ListView lv;
 
     int fragCount;
-
 
     public static HomeFragment newInstance(int instance) {
         Bundle args = new Bundle();
@@ -36,45 +43,40 @@ public class HomeFragment extends BaseFragment {
         // Required empty public constructor
     }
 
+    public void generateListContent(int CURRENT_USERID){
+
+    }
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setHasOptionsMenu(true);
+        posts = new ArrayList<>();
+        posts.add(new PostModel("Derek","????","1;2;3"));
+        posts.add(new PostModel("Hung","????","1;2;3"));
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_home, container, false);
 
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
-
-
-        ButterKnife.bind(this, view);
-
-        Bundle args = getArguments();
-        if (args != null) {
-            fragCount = args.getInt(ARGS_INSTANCE);
-        }
-
-
-        return view;
+        adapter = new PostListAdapter(getActivity(), posts);
+        lv = rootView.findViewById(R.id.listview);
+        lv.setAdapter(adapter);
+        setRetainInstance(true);
+        return rootView;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-
-        btnClickMe.setOnClickListener(new View.OnClickListener() {
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
-
-                if (mFragmentNavigation != null) {
-                    mFragmentNavigation.pushFragment(HomeFragment.newInstance(fragCount + 1));
-
-                }
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getContext(), "List item was clicked at " + position, Toast.LENGTH_SHORT).show();
             }
         });
 
