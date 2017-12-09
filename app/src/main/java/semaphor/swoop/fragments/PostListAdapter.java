@@ -3,23 +3,16 @@ package semaphor.swoop.fragments;
 /**
  * Created by derek-w on 12/6/17.
  */
+
 import android.content.Context;
-import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import semaphor.swoop.R;
@@ -59,35 +52,31 @@ public class PostListAdapter extends BaseAdapter {
             ImageView profilePic =  v.findViewById(R.id.profilePic);
             TextView userName =  v.findViewById(R.id.userName);
             TextView userQuestion =  v.findViewById(R.id.userQuestion);
-            Button option1 = v.findViewById(R.id.option1);
-            Button option2 = v.findViewById(R.id.option2);
-            Button option3 = v.findViewById(R.id.option3);
 
             userQuestion.setText(mPostList.get(position).getTextQuestion());
             userName.setText(mPostList.get(position).getUsername());
-            option1.setText(mPostList.get(position).getArrayTextAnswer()[0]);
-            option2.setText(mPostList.get(position).getArrayTextAnswer()[1]);
-            option3.setText(mPostList.get(position).getArrayTextAnswer()[3]);
 
+            String[] answers = mPostList.get(position).getArrayTextAnswer();
+            Button[] options = new Button[answers.length];
+            for (int i = 0; i < answers.length; i++) {
+                String strOptionID = "option" + (i + 1);
 
-       option1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(hContext, "Button was clicked for list item " + position, Toast.LENGTH_SHORT).show();
+                // get the int id for R.id. from the string variable
+                int intOptionID = hContext.getResources().getIdentifier(strOptionID, "id", hContext.getPackageName());
+                options[i] = v.findViewById(intOptionID);
+                CharSequence charSequence = mPostList.get(position).getArrayTextAnswer()[i];
+
+                if (charSequence != null) {
+                    options[i].setText(charSequence.toString());
+                    options[i].setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(hContext, "Button was clicked for list item " + position, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
             }
-        });
-        option2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(hContext, "Button was clicked for list item " + position, Toast.LENGTH_SHORT).show();
-            }
-        });
-        option3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(hContext, "Button was clicked for list item " + position, Toast.LENGTH_SHORT).show();
-            }
-        });
+
         v.setTag(mPostList.get(position).getID());
        return v;
     }

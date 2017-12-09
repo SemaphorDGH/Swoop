@@ -4,26 +4,32 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import semaphor.swoop.R;
-import semaphor.swoop.fragments.BaseFragment;
-import semaphor.swoop.fragments.HomeFragment;
-import semaphor.swoop.fragments.NewsFragment;
-import semaphor.swoop.fragments.ProfileFragment;
-import semaphor.swoop.fragments.SearchFragment;
-import semaphor.swoop.fragments.ShareFragment;
-import semaphor.swoop.utils.FragmentHistory;
-import semaphor.swoop.utils.Utils;
-import semaphor.swoop.views.FragNavController;
+import java.util.Random;
 
 import butterknife.BindArray;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import semaphor.swoop.R;
+import semaphor.swoop.database.PostModel;
+import semaphor.swoop.database.PostsDatabaseHandler;
+import semaphor.swoop.database.UserModel;
+import semaphor.swoop.database.UsersDatabaseHandler;
+import semaphor.swoop.fragments.BaseFragment;
+import semaphor.swoop.fragments.HomeFragment;
+import semaphor.swoop.fragments.NewsFragment;
+import semaphor.swoop.fragments.PostFragment;
+import semaphor.swoop.fragments.ProfileFragment;
+import semaphor.swoop.fragments.SearchFragment;
+import semaphor.swoop.utils.FragmentHistory;
+import semaphor.swoop.utils.Utils;
+import semaphor.swoop.views.FragNavController;
 
 public class HomeActivity extends BaseActivity implements BaseFragment.FragmentNavigation, FragNavController.TransactionListener, FragNavController.RootFragmentListener {
 
@@ -61,6 +67,7 @@ public class HomeActivity extends BaseActivity implements BaseFragment.FragmentN
 
         ButterKnife.bind(this);
 
+        initDatabase();
 
         initToolbar();
 
@@ -281,7 +288,7 @@ public class HomeActivity extends BaseActivity implements BaseFragment.FragmentN
             case FragNavController.TAB2:
                 return new SearchFragment();
             case FragNavController.TAB3:
-                return new ShareFragment();
+                return new PostFragment();
             case FragNavController.TAB4:
                 return new NewsFragment();
             case FragNavController.TAB5:
@@ -306,5 +313,54 @@ public class HomeActivity extends BaseActivity implements BaseFragment.FragmentN
 
         getSupportActionBar().setTitle(title);
 
+    }
+
+    public  void initDatabase() {
+        UsersDatabaseHandler users = new UsersDatabaseHandler(this);
+        // Deleting all users
+        Log.d("Delete ", "Deleting all users...");
+        users.deleteAllUsers();
+        /*
+        * CRUD operations
+        * */
+        // Inserting users
+        Log.d("Insert ", "Inserting users ...");
+        Random r = new Random();
+        users.addUser(new UserModel(r.nextInt(), "Hung", "123", "1", "2"));
+        users.addUser(new UserModel(r.nextInt(), "Derek", "456", "2", "0"));
+        users.addUser(new UserModel(r.nextInt(), "Giang", "789", "0", "1"));
+
+//        // Reading all users
+//        Log.d("Read ", "Reading users...");
+//        List<UserModel> userList = users.getAllUsers();
+//
+//        for (UserModel user : userList) {
+//            String log = "ID: " + user.getID() + ", Username: " + user.getUsername() + ", Password: " + user.getPassword()
+//                    + ", Fan IDs: " + user.getStringFanIDs() + ", Follow IDs: " + user.getStringFollowIDs();
+//            Log.d("User ", log);
+//        }
+
+        PostsDatabaseHandler posts = new PostsDatabaseHandler(this);
+        // Deleting all posts
+        Log.d("Delete ", "Deleting all posts...");
+        posts.deleteAllPosts();
+        /*
+        * CRUD operations
+        * */
+        // Inserting posts
+        Log.d("Insert ", "Inserting posts ...");
+        posts.addPost(new PostModel("Hung", "Is Hitler a good man?", "Good;Bad"));
+        posts.addPost(new PostModel("Derek", "Pick between Samsung S8, iPhone 8, and Xiao", "Samsung S8;iPhone 8"));
+        posts.addPost(new PostModel("Giang", "What should I eat today?", "Fish;Beef;Pork"));
+
+//        // Reading all posts
+//        Log.d("Read ", "Reading posts...");
+//        List<PostModel> postList = posts.getPostsByUsername("Hung");
+//
+//        for (PostModel post : postList) {
+//            String log = "ID: " + post.getID() + ", Username: " + post.getUsername() + ", Question: " + post.getTextQuestion()
+//                    + ", Answer: " + post.getStringTextAnswer() + ", Date: " + post.getDate();
+//            Log.d("Post ", log);
+//        }
     }
 }
