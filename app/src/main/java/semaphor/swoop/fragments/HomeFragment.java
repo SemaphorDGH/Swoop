@@ -15,6 +15,7 @@ import java.util.List;
 
 import semaphor.swoop.R;
 import semaphor.swoop.activities.HomeActivity;
+
 import semaphor.swoop.database.PostModel;
 import semaphor.swoop.database.PostsDatabaseHandler;
 
