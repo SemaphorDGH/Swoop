@@ -2,29 +2,31 @@ package semaphor.swoop.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ListView;
-
-import semaphor.swoop.R;
-import semaphor.swoop.activities.HomeActivity;
-
 import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import semaphor.swoop.R;
+import semaphor.swoop.activities.HomeActivity;
 
 import semaphor.swoop.database.PostModel;
+import semaphor.swoop.database.PostsDatabaseHandler;
 
 
 public class HomeFragment extends BaseFragment {
+    private static final String TAG = "HomeFragment";
+
     private List<PostModel> posts;
     private PostListAdapter adapter;
     private ListView lv;
+    private PostsDatabaseHandler postsDatabaseHandler;
 
     int fragCount;
 
@@ -50,16 +52,27 @@ public class HomeFragment extends BaseFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        posts = new ArrayList<>();
-        posts.add(new PostModel("Derek","????","1;2;3"));
-        posts.add(new PostModel("Hung","????","1;2;3"));
 
+        postsDatabaseHandler = new PostsDatabaseHandler(this.getActivity());
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_home, container, false);
+
+        Log.d(TAG, "onCreateView is called");
+        // Reading all posts
+        Log.d("Read ", "Reading posts...");
+        List<PostModel> postList = postsDatabaseHandler.getAllPosts();
+        posts = new ArrayList<>();
+
+        for (PostModel post : postList) {
+            String log = "ID: " + post.getID() + ", Username: " + post.getUsername() + ", Question: " + post.getTextQuestion()
+                    + ", Answer: " + post.getStringTextAnswer() + ", Date: " + post.getDate();
+            Log.d("Post ", log);
+            posts.add(post);
+        }
 
         adapter = new PostListAdapter(getActivity(), posts);
         lv = rootView.findViewById(R.id.listview);
