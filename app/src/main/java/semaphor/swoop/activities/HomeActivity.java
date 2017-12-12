@@ -4,23 +4,18 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import java.util.Random;
+import com.beardedhen.androidbootstrap.TypefaceProvider;
 
 import butterknife.BindArray;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import semaphor.swoop.R;
-import semaphor.swoop.database.PostModel;
-import semaphor.swoop.database.PostsDatabaseHandler;
-import semaphor.swoop.database.UserModel;
-import semaphor.swoop.database.UsersDatabaseHandler;
 import semaphor.swoop.fragments.BaseFragment;
 import semaphor.swoop.fragments.HomeFragment;
 import semaphor.swoop.fragments.NewsFragment;
@@ -61,13 +56,16 @@ public class HomeActivity extends BaseActivity implements BaseFragment.FragmentN
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // register for Android-Bootstrap by Bearded-Hen
+        TypefaceProvider.registerDefaultIconSets();
         setContentView(R.layout.activity_home);
 
         int CURRENT_USERID = getIntent().getIntExtra("CURRENT_USERID", 0);
 
         ButterKnife.bind(this);
 
-        initDatabase();
+        initPostDatabase();
 
         initToolbar();
 
@@ -315,43 +313,25 @@ public class HomeActivity extends BaseActivity implements BaseFragment.FragmentN
 
     }
 
-    public  void initDatabase() {
-        UsersDatabaseHandler users = new UsersDatabaseHandler(this);
-        // Deleting all users
-        Log.d("Delete ", "Deleting all users...");
-        users.deleteAllUsers();
-        /*
-        * CRUD operations
-        * */
-        // Inserting users
-        Log.d("Insert ", "Inserting users ...");
-        Random r = new Random();
-        users.addUser(new UserModel(r.nextInt(), "Hung", "123", "1", "2"));
-        users.addUser(new UserModel(r.nextInt(), "Derek", "456", "2", "0"));
-        users.addUser(new UserModel(r.nextInt(), "Giang", "789", "0", "1"));
-
-//        // Reading all users
-//        Log.d("Read ", "Reading users...");
-//        List<UserModel> userList = users.getAllUsers();
+    public  void initPostDatabase() {
+//        PostsDatabaseHandler posts = new PostsDatabaseHandler(this);
+//        // Deleting all posts
+//        Log.d("Delete ", "Deleting all posts...");
+//        posts.deleteAllPosts();
+//        /*
+//        * CRUD operations
+//        * */
+//        // Inserting posts
+//        Log.d("Insert ", "Inserting posts ...");
 //
-//        for (UserModel user : userList) {
-//            String log = "ID: " + user.getID() + ", Username: " + user.getUsername() + ", Password: " + user.getPassword()
-//                    + ", Fan IDs: " + user.getStringFanIDs() + ", Follow IDs: " + user.getStringFollowIDs();
-//            Log.d("User ", log);
-//        }
-
-        PostsDatabaseHandler posts = new PostsDatabaseHandler(this);
-        // Deleting all posts
-        Log.d("Delete ", "Deleting all posts...");
-        posts.deleteAllPosts();
-        /*
-        * CRUD operations
-        * */
-        // Inserting posts
-        Log.d("Insert ", "Inserting posts ...");
-        posts.addPost(new PostModel("Hung", "Is Hitler a good man?", "Good;Bad"));
-        posts.addPost(new PostModel("Derek", "Pick between Samsung S8, iPhone 8, and Xiao", "Samsung S8;iPhone 8"));
-        posts.addPost(new PostModel("Giang", "What should I eat today?", "Fish;Beef;Pork"));
+//        posts.addPost(new PostModel("Hung", "Which colors do you like?",
+//                "Red;Yellow;Blue", Calendar.getInstance().getTime()));
+//
+//        posts.addPost(new PostModel("Derek", "Pick the best phone",
+//                "Samsung S8;iPhone 8;Google Pixel", Calendar.getInstance().getTime()));
+//
+//        posts.addPost(new PostModel("Giang", "What should I eat today?",
+//                "Fish;Beef;Pork", Calendar.getInstance().getTime()));
 
 //        // Reading all posts
 //        Log.d("Read ", "Reading posts...");

@@ -55,4 +55,10 @@
     <color name="aluminum">#999999</color>
     <color name="base">#AAAAAA</color>
     <color name="iron">#CCCCCC</color>
+
+
+    <!-- customized colors here-->
+
+    <color name="dark_blue">#2c3e50</color>
+
 </resources>

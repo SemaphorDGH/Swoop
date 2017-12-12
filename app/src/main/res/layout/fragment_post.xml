@@ -1,57 +1,120 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center">
+    android:background="@color/white"
+    android:orientation="vertical">
 
-    <android.support.design.widget.TextInputLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:background="@color/white">
 
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/post_question"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Question"
-            android:inputType="text"
-            android:singleLine="false" />
-    </android.support.design.widget.TextInputLayout>
+            android:layout_marginBottom="20dp"
+            app:hintEnabled="false">
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/post_question"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:padding="@dimen/component_padding"
+                android:hint="@string/ask_a_question"
+                android:background="@color/transparent"
+                android:singleLine="false"
+                />
+        </android.support.design.widget.TextInputLayout>
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp">
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/post_answer_1"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text" />
-    </android.support.design.widget.TextInputLayout>
+            android:layout_height="match_parent"
+            android:padding="25dp"
+            android:orientation="vertical"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:background="@color/white">
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp">
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/post_answer_2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text" />
-    </android.support.design.widget.TextInputLayout>
+            <LinearLayout
+                android:id="@+id/post_options_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:background="@color/white">
 
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/post_submit_button"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="24dp"
-        android:padding="12dp"
-        android:text="Submit"/>
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    app:hintEnabled="false">
+                    <android.support.design.widget.TextInputEditText
+                        android:tag="post_option_0"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/MyTextInputEditText"
+                        android:background="@drawable/rounded_editext"
+                        android:hint="@string/add_an_option"
+                        />
+                </android.support.design.widget.TextInputLayout>
 
-</LinearLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    app:hintEnabled="false">
+                    <android.support.design.widget.TextInputEditText
+                        android:tag="post_option_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/MyTextInputEditText"
+                        android:background="@drawable/rounded_editext"
+                        android:hint="@string/add_an_option"
+                        />
+                </android.support.design.widget.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/component_margin_bottom" >
+
+                <Button
+                    android:id="@+id/post_add_option_button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp"
+                    android:text="Add A Option"
+                    android:textColor="@color/dark_blue"
+                    android:background="@drawable/post_add_option_button"/>
+
+                <Button
+                    android:id="@+id/post_remove_option_button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Remove An Option"
+                    android:textColor="@color/dark_blue"
+                    android:background="@drawable/post_add_option_button"/>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/post_submit_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Post"
+                android:textColor="@color/white"
+                android:background="@drawable/post_submit_button"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

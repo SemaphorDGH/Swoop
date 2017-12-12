@@ -11,4 +11,8 @@
         <item>News</item>
         <item>Profile</item>
     </array>
+
+    <!-- post -->
+    <string name="ask_a_question">Ask a Question...</string>
+    <string name="add_an_option">Fill the Option...</string>
 </resources>

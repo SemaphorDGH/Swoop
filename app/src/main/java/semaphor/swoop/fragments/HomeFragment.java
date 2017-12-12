@@ -10,6 +10,9 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.beardedhen.androidbootstrap.TypefaceProvider;
+
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,6 +53,9 @@ public class HomeFragment extends BaseFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // register for Android-Bootstrap by Bearded-Hen
+        TypefaceProvider.registerDefaultIconSets();
         setHasOptionsMenu(true);
 
         postsDatabaseHandler = new PostsDatabaseHandler(this.getActivity());
@@ -63,7 +69,12 @@ public class HomeFragment extends BaseFragment {
         Log.d(TAG, "onCreateView is called");
         // Reading all posts
         Log.d("Read ", "Reading posts...");
-        List<PostModel> postList = postsDatabaseHandler.getAllPosts();
+        List<PostModel> postList = null;
+        try {
+            postList = postsDatabaseHandler.getAllPosts();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         posts = new ArrayList<>();
 
         for (PostModel post : postList) {

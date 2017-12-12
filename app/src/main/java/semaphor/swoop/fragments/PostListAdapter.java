@@ -5,13 +5,14 @@ package semaphor.swoop.fragments;
  */
 
 import android.content.Context;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -20,6 +21,7 @@ import semaphor.swoop.database.PostModel;
 
 
 public class PostListAdapter extends BaseAdapter {
+    private static final String TAG = "PostLipAdapter";
 
     private Context hContext;
 
@@ -47,38 +49,62 @@ public class PostListAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        View v = View.inflate(hContext,R.layout.list_item,null);
+        View v = View.inflate(hContext, R.layout.list_item, null);
 
-            ImageView profilePic =  v.findViewById(R.id.profilePic);
-            TextView userName =  v.findViewById(R.id.userName);
-            TextView userQuestion =  v.findViewById(R.id.userQuestion);
+        ImageView profilePic = v.findViewById(R.id.profilePic);
+        TextView userName = v.findViewById(R.id.userName);
+        TextView userQuestion = v.findViewById(R.id.userQuestion);
 
-            userQuestion.setText(mPostList.get(position).getTextQuestion());
-            userName.setText(mPostList.get(position).getUsername());
+        userQuestion.setText(mPostList.get(position).getTextQuestion());
+        userName.setText(mPostList.get(position).getUsername());
 
-            String[] answers = mPostList.get(position).getArrayTextAnswer();
-            Button[] options = new Button[answers.length];
-            for (int i = 0; i < answers.length; i++) {
-                String strOptionID = "option" + (i + 1);
+        // from answers, create buttons and add them to options of posts
+        LinearLayout linearLayout = (LinearLayout) v.findViewById(R.id.list_options_layout);
+        String[] answers = mPostList.get(position).getArrayTextAnswer();
+        Button[] options = new Button[answers.length];
 
-                // get the int id for R.id. from the string variable
-                int intOptionID = hContext.getResources().getIdentifier(strOptionID, "id", hContext.getPackageName());
-                options[i] = v.findViewById(intOptionID);
-                CharSequence charSequence = mPostList.get(position).getArrayTextAnswer()[i];
+        for (int i = 0; i < answers.length; i++) {
+            // get the int id for R.id. from the string variable
+            //int intOptionID = hContext.getResources().getIdentifier(strOptionID, "id", hContext.getPackageName());
+            CharSequence answer = mPostList.get(position).getArrayTextAnswer()[i];
+            options[i] = createNewOption(answer, i);
 
-                if (charSequence != null) {
-                    options[i].setText(charSequence.toString());
-                    options[i].setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Toast.makeText(hContext, "Button was clicked for list item " + position, Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
-            }
+            // add the option button to the specified layout
+            linearLayout.addView(options[i]);
+        }
 
         v.setTag(mPostList.get(position).getID());
-       return v;
+        return v;
     }
 
+    public int getMarginBottom() {
+        // convert dp and int to set margins for layout of the option button
+        float scaleRatio = hContext.getResources().getDisplayMetrics().density;
+        float dpPix = hContext.getResources().getDimension(R.dimen.component_margin_bottom);
+        float dpValue = dpPix/scaleRatio;
+
+        int marginBottom = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                dpValue, hContext.getResources().getDisplayMetrics()));
+
+        return marginBottom;
+    }
+
+    public Button createNewOption(CharSequence answer, int index) {
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+        layoutParams.setMargins(0, 0, 0, getMarginBottom());
+
+        Button option = new Button(hContext);
+        String tag = "list_option_" + index;
+        option.setTag(tag);
+
+        // design the option button
+        option.setLayoutParams(layoutParams);
+        option.setText(answer);
+        option.setBackgroundResource(R.drawable.option_button);
+        option.setTextColor(hContext.getResources().getColor(R.color.dark_blue, null));
+
+        return option;
+    }
 }

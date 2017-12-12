@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.Random;
 
@@ -58,7 +59,12 @@ public class SqliteTest extends Activity {
 
         // Reading all posts
         Log.d("Read ", "Reading posts...");
-        List<PostModel> postList = posts.getPostsByUsername("Hung");
+        List<PostModel> postList = null;
+        try {
+            postList = posts.getPostsByUsername("Hung");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         for (PostModel post : postList) {
             String log = "ID: " + post.getID() + ", Username: " + post.getUsername() + ", Question: " + post.getTextQuestion()
