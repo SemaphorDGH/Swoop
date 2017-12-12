@@ -16,18 +16,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="semaphor.swoop.activities.SignupActivity" android:theme="@style/AppTheme.Dark" />   `
-        <activity android:name=".activities.HomeActivity"  android:theme ="@style/AppTheme1"/>
-        <!--
-        <activity android:name=".activities.HomeActivity" android:noHistory="true"/>
-        <activity android:name=".database.SqliteTest">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        -->
+        <activity
+            android:name="semaphor.swoop.activities.SignupActivity"
+            android:theme="@style/AppTheme.Dark"/>   `
+        <activity
+            android:name=".activities.HomeActivity"
+            android:theme ="@style/AppTheme1"/>
     </application>
+
+    <supports-screens android:resizeable="true"
+        android:smallScreens="true"
+        android:normalScreens="true"
+        android:largeScreens="true"
+        android:anyDensity="true" />
 
 </manifest>

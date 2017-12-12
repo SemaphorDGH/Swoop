@@ -5,8 +5,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
@@ -15,7 +19,7 @@ import java.util.Random;
  */
 
 public class PostsDatabaseHandler extends SQLiteOpenHelper {
-
+    private static final String TAG = "PostsDatabaseHandler";
     // All static variables
     // Database version
     private static final int DATABASE_VERSION = 1;
@@ -67,7 +71,7 @@ public class PostsDatabaseHandler extends SQLiteOpenHelper {
         values.put(COLUMN_USERNAME, post.getUsername()); // username
         values.put(COLUMN_TEXT_QUESTION, post.getTextQuestion()); // text question
         values.put(COLUMN_TEXT_ANSWER, post.getStringTextAnswer()); // text answer
-        values.put(COLUMN_DATE, post.getDate()); // date
+        values.put(COLUMN_DATE, post.getStringDate()); // date
 
         // Inserting row
         db.insert(TABLE_POSTS, null, values);
@@ -75,7 +79,7 @@ public class PostsDatabaseHandler extends SQLiteOpenHelper {
     }
 
     // Getting single user
-    public PostModel getPostByID(int id) {
+    public PostModel getPostByID(int id) throws ParseException {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_POSTS, new String[] { COLUMN_ID, COLUMN_USERNAME, COLUMN_TEXT_QUESTION, COLUMN_TEXT_ANSWER, COLUMN_DATE },
@@ -90,7 +94,7 @@ public class PostsDatabaseHandler extends SQLiteOpenHelper {
     }
 
     // Getting all posts
-    public List<PostModel> getAllPosts() {
+    public List<PostModel> getAllPosts() throws ParseException {
         List<PostModel> postList = new ArrayList<>();
         // Select all queries
         String selectAllQueries = "SELECT * FROM " + TABLE_POSTS;
@@ -107,10 +111,12 @@ public class PostsDatabaseHandler extends SQLiteOpenHelper {
         }
         cursor.close();
 
+        sortPostsByDate(postList);
+
         return postList;
     }
     
-    public List<PostModel> getPostsByUsername(String username) {
+    public List<PostModel> getPostsByUsername(String username) throws ParseException {
         List<PostModel> postList = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -125,7 +131,19 @@ public class PostsDatabaseHandler extends SQLiteOpenHelper {
         }
         cursor.close();
 
+        sortPostsByDate(postList);
+
         return postList;
+    }
+
+    public void sortPostsByDate(List<PostModel> posts) {
+        Collections.sort(posts, new Comparator<PostModel>() {
+            @Override
+            public int compare(PostModel p1, PostModel p2) {
+                Log.d(TAG, String.valueOf(p2.getDate().compareTo(p1.getDate())));
+                return p2.getDate().compareTo(p1.getDate());
+            }
+        });
     }
 
     // Getting posts count
@@ -147,7 +165,7 @@ public class PostsDatabaseHandler extends SQLiteOpenHelper {
         values.put(COLUMN_USERNAME, post.getUsername()); // username
         values.put(COLUMN_TEXT_QUESTION, post.getTextQuestion()); // text question
         values.put(COLUMN_TEXT_ANSWER, post.getStringTextAnswer()); // text answer
-        values.put(COLUMN_DATE, post.getDate()); // date
+        values.put(COLUMN_DATE, post.getStringDate()); // date
 
         // Updating row
         return db.update(TABLE_POSTS, values, COLUMN_ID + "=?", new String[]{ String.valueOf(post.getID())});

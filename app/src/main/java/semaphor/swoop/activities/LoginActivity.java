@@ -8,13 +8,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import com.beardedhen.androidbootstrap.TypefaceProvider;
+
+import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
 import semaphor.swoop.R;
 import semaphor.swoop.database.UserModel;
 import semaphor.swoop.database.UsersDatabaseHandler;
@@ -28,11 +29,17 @@ public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.input_email) TextInputEditText _emailText;
     @BindView(R.id.input_password) TextInputEditText _passwordText;
     @BindView(R.id.btn_login) Button _loginButton;
-    @BindView(R.id.link_signup) TextView _signupLink;
+    @BindView(R.id.link_signup) Button _signupLink;
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // register for Android-Bootstrap by Bearded-Hen
+        TypefaceProvider.registerDefaultIconSets();
+
+        initUserDatabase();
+
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         //CURRENTDB = new UsersDatabaseHandler(this);
@@ -151,5 +158,31 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         return valid;
+    }
+
+    public void initUserDatabase() {
+        UsersDatabaseHandler users = new UsersDatabaseHandler(this);
+        // Deleting all users
+        Log.d("Delete ", "Deleting all users...");
+        users.deleteAllUsers();
+        /*
+        * CRUD operations
+        * */
+        // Inserting users
+        Log.d("Insert ", "Inserting users ...");
+        Random r = new Random();
+        users.addUser(new UserModel(r.nextInt(), "Hung", "123", "1", "2"));
+        users.addUser(new UserModel(r.nextInt(), "Derek", "456", "2", "0"));
+        users.addUser(new UserModel(r.nextInt(), "Giang", "789", "0", "1"));
+
+//        // Reading all users
+//        Log.d("Read ", "Reading users...");
+//        List<UserModel> userList = users.getAllUsers();
+//
+//        for (UserModel user : userList) {
+//            String log = "ID: " + user.getID() + ", Username: " + user.getUsername() + ", Password: " + user.getPassword()
+//                    + ", Fan IDs: " + user.getStringFanIDs() + ", Follow IDs: " + user.getStringFollowIDs();
+//            Log.d("User ", log);
+//        }
     }
 }
