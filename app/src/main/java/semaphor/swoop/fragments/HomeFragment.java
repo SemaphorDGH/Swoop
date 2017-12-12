@@ -18,6 +18,10 @@ import java.util.List;
 
 import semaphor.swoop.R;
 import semaphor.swoop.activities.HomeActivity;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 143c8a6e368ac8fd202883278a4c9618af962c90
 import semaphor.swoop.database.PostModel;
 import semaphor.swoop.database.PostsDatabaseHandler;
 
