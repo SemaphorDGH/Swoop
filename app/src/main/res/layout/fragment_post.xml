@@ -92,7 +92,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginRight="10dp"
-                    android:text="Add A Option"
+                    android:text="Add Option"
                     android:textColor="@color/dark_blue"
                     android:background="@drawable/post_add_option_button"/>
 
@@ -101,7 +101,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Remove An Option"
+                    android:text="Remove Option"
                     android:textColor="@color/dark_blue"
                     android:background="@drawable/post_add_option_button"/>
 

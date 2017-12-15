@@ -21,7 +21,6 @@ android {
 ext {
     supportLibraryVersion = '25.2.0'
     butterknifeVersion = "8.8.1"
-
 }
 
 dependencies {
@@ -36,7 +35,6 @@ dependencies {
     compile 'com.android.support:support-v4:26.+'
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.beardedhen:androidbootstrap:2.3.2'
     //adding library
     compile "com.jakewharton:butterknife:$butterknifeVersion"
     annotationProcessor "com.jakewharton:butterknife-compiler:$butterknifeVersion"

@@ -10,8 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.beardedhen.androidbootstrap.TypefaceProvider;
-
 import java.util.Random;
 
 import butterknife.BindView;
@@ -34,9 +32,6 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // register for Android-Bootstrap by Bearded-Hen
-        TypefaceProvider.registerDefaultIconSets();
 
         initUserDatabase();
 

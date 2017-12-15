@@ -11,8 +11,11 @@ import java.util.Date;
 
 public class PostModel {
     private int id;
+
     private String[] answers;
     private int[] votes;
+    private double[] percentages;
+
     private String username, textQuestion;
     private Date date;
 
@@ -26,12 +29,16 @@ public class PostModel {
         this.username = username;
         this.textQuestion = textQuestion;
         this.answers = textAnswer.split(";");
+        this.votes = new int[this.answers.length];
+        this.percentages = new double[this.answers.length];
     }
 
     public PostModel(String username, String textQuestion, String textAnswer) {
         this.username = username;
         this.textQuestion = textQuestion;
         this.answers = textAnswer.split(";");
+        this.votes = new int[this.answers.length];
+        this.percentages = new double[this.answers.length];
     }
 
     public PostModel(int id, String username, String textQuestion, String textAnswer, Date date) {
@@ -39,6 +46,8 @@ public class PostModel {
         this.username = username;
         this.textQuestion = textQuestion;
         this.answers = textAnswer.split(";");
+        this.votes = new int[this.answers.length];
+        this.percentages = new double[this.answers.length];
         this.date = date;
     }
 
@@ -47,6 +56,8 @@ public class PostModel {
         this.username = username;
         this.textQuestion = textQuestion;
         this.answers = textAnswer.split(";");
+        this.votes = new int[this.answers.length];
+        this.percentages = new double[this.answers.length];
         this.date = getDateByStringDate(date);
     }
 
@@ -54,6 +65,8 @@ public class PostModel {
         this.username = username;
         this.textQuestion = textQuestion;
         this.answers = textAnswer.split(";");
+        this.votes = new int[this.answers.length];
+        this.percentages = new double[this.answers.length];
         this.date = date;
     }
 
@@ -61,6 +74,8 @@ public class PostModel {
         this.username = username;
         this.textQuestion = textQuestion;
         this.answers = textAnswer.split(";");
+        this.votes = new int[this.answers.length];
+        this.percentages = new double[this.answers.length];
         this.date = getDateByStringDate(date);
     }
 
@@ -72,10 +87,12 @@ public class PostModel {
         this.date = date;
     }
 
-    public PostModel(String username, String textQuestion, String[] textAnswer, Date date) {
+    public PostModel(String username, String textQuestion, String[] answers, Date date) {
         this.username = username;
         this.textQuestion = textQuestion;
-        this.answers = textAnswer;
+        this.answers = answers;
+        this.votes = new int[this.answers.length];
+        this.percentages = new double[this.answers.length];
         this.date = date;
     }
 
@@ -157,5 +174,25 @@ public class PostModel {
     public void setTextAnswer(String text) {
         String[] textAnswer = text.split(";");
         this.answers = textAnswer;
+    }
+
+    private int getTotalVotes() {
+        int totalVotes = 0;
+        for (int i = 0; i < votes.length; i++) {
+            totalVotes += votes[i];
+        }
+
+        return totalVotes;
+    }
+
+    private void setVotingPercentage() {
+        int totalVotes = getTotalVotes();
+        for (int i = 0; i < percentages.length; i++) {
+            percentages[i] = votes[i] / totalVotes;
+        }
+    }
+
+    private double[] getVotingPercentage() {
+        return this.percentages;
     }
 }

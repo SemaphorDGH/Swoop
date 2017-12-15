@@ -10,18 +10,12 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.beardedhen.androidbootstrap.TypefaceProvider;
-
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 import semaphor.swoop.R;
 import semaphor.swoop.activities.HomeActivity;
-<<<<<<< HEAD
-=======
-
->>>>>>> 143c8a6e368ac8fd202883278a4c9618af962c90
 import semaphor.swoop.database.PostModel;
 import semaphor.swoop.database.PostsDatabaseHandler;
 
@@ -57,9 +51,6 @@ public class HomeFragment extends BaseFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // register for Android-Bootstrap by Bearded-Hen
-        TypefaceProvider.registerDefaultIconSets();
         setHasOptionsMenu(true);
 
         postsDatabaseHandler = new PostsDatabaseHandler(this.getActivity());
@@ -70,9 +61,10 @@ public class HomeFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_home, container, false);
 
-        Log.d(TAG, "onCreateView is called");
         // Reading all posts
         Log.d("Read ", "Reading posts...");
+
+        // parse posts into home
         List<PostModel> postList = null;
         try {
             postList = postsDatabaseHandler.getAllPosts();
@@ -91,6 +83,7 @@ public class HomeFragment extends BaseFragment {
         adapter = new PostListAdapter(getActivity(), posts);
         lv = rootView.findViewById(R.id.listview);
         lv.setAdapter(adapter);
+
         setRetainInstance(true);
         return rootView;
     }

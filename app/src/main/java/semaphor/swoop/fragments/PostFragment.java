@@ -13,8 +13,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-import com.beardedhen.androidbootstrap.TypefaceProvider;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -41,9 +39,6 @@ public class PostFragment extends BaseFragment{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // register for Android-Bootstrap by Bearded-Hen
-        TypefaceProvider.registerDefaultIconSets();
 
         postsDatabaseHandler = new PostsDatabaseHandler(this.getActivity());
     }

@@ -1,5 +1,6 @@
 package semaphor.swoop.activities;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -8,9 +9,8 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
-
-import com.beardedhen.androidbootstrap.TypefaceProvider;
 
 import butterknife.BindArray;
 import butterknife.BindView;
@@ -27,7 +27,7 @@ import semaphor.swoop.utils.Utils;
 import semaphor.swoop.views.FragNavController;
 
 public class HomeActivity extends BaseActivity implements BaseFragment.FragmentNavigation, FragNavController.TransactionListener, FragNavController.RootFragmentListener {
-
+    private static final String TAG = "HomeActivity";
 
     @BindView(R.id.content_frame)
     FrameLayout contentFrame;
@@ -38,10 +38,11 @@ public class HomeActivity extends BaseActivity implements BaseFragment.FragmentN
     private int[] mTabIconsSelected = {
             R.drawable.tab_home,
             R.drawable.tab_search,
-            R.drawable.tab_share,
-            R.drawable.tab_news,
+            R.drawable.circle_question_mark,
+            R.drawable.tab_message,
             R.drawable.tab_profile};
 
+    private ImageButton _home_post_button;
 
     @BindArray(R.array.tab_name)
     String[] TABS;
@@ -56,9 +57,6 @@ public class HomeActivity extends BaseActivity implements BaseFragment.FragmentN
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // register for Android-Bootstrap by Bearded-Hen
-        TypefaceProvider.registerDefaultIconSets();
         setContentView(R.layout.activity_home);
 
         int CURRENT_USERID = getIntent().getIntExtra("CURRENT_USERID", 0);
@@ -109,6 +107,14 @@ public class HomeActivity extends BaseActivity implements BaseFragment.FragmentN
             }
         });
 
+//        _home_post_button = this.findViewById(R.id.home_post_button);
+//        _home_post_button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
+
     }
 
     private void initToolbar() {
@@ -121,17 +127,27 @@ public class HomeActivity extends BaseActivity implements BaseFragment.FragmentN
             for (int i = 0; i < TABS.length; i++) {
                 bottomTabLayout.addTab(bottomTabLayout.newTab());
                 TabLayout.Tab tab = bottomTabLayout.getTabAt(i);
-                if (tab != null)
-                    tab.setCustomView(getTabView(i));
+                if (tab != null) {
+                    View tabView = getTabView(i);
+
+                    // index of tab post (circle question mark image)
+                    if (i == 2) {
+                        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(190, 190);
+                        tabView.setLayoutParams(params);
+                    }
+
+                    tab.setCustomView(tabView);
+
+                }
             }
         }
     }
 
-
     private View getTabView(int position) {
         View view = LayoutInflater.from(HomeActivity.this).inflate(R.layout.tab_item_bottom, null);
         ImageView icon = (ImageView) view.findViewById(R.id.tab_icon);
-        icon.setImageDrawable(Utils.setDrawableSelector(HomeActivity.this, mTabIconsSelected[position], mTabIconsSelected[position]));
+        Drawable tab_icon = Utils.setDrawableSelector(HomeActivity.this, mTabIconsSelected[position], mTabIconsSelected[position]);
+        icon.setImageDrawable(tab_icon);
         return view;
     }
 
