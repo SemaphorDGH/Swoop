@@ -8,10 +8,8 @@
 
 
     <ListView
-        android:id="@+id/listview_posts"
+        android:id="@+id/listview_infos"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="10dp"></ListView>
-
+        android:layout_height="match_parent" />
 </LinearLayout>
+

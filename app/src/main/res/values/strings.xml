@@ -11,6 +11,11 @@
         <item>News</item>
         <item>Profile</item>
     </array>
+    <array name="profile_tab_name">
+        <item>Info</item>
+        <item>Posts</item>
+        <item>Pins</item>
+    </array>
 
     <!-- post -->
     <string name="ask_a_question">Ask a Question...</string>

@@ -49,12 +49,13 @@ public class PostListAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        View v = View.inflate(hContext, R.layout.list_item, null);
+        View v = View.inflate(hContext, R.layout.list_post, null);
 
         ImageView profilePic = v.findViewById(R.id.profilePic);
         TextView userName = v.findViewById(R.id.userName);
         TextView userQuestion = v.findViewById(R.id.userQuestion);
-
+        TextView postDate = v.findViewById(R.id.post_date);
+        postDate.setText(mPostList.get(position).getStringDate());
         userQuestion.setText(mPostList.get(position).getTextQuestion());
         userName.setText(mPostList.get(position).getUsername());
 

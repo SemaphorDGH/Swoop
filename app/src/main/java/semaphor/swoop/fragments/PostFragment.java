@@ -175,7 +175,7 @@ public class PostFragment extends BaseFragment{
      *
      * @param view
      */
-    public  void removeOption(View view) {
+    public void removeOption(View view) {
         int size = listOptions.size();
         if (size > 2) {
             Log.d(TAG, "Remove Most Recent Option");
