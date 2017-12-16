@@ -8,6 +8,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.util.TypedValue;
 import android.view.Display;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -33,7 +34,7 @@ public class PostListAdapter extends BaseAdapter {
     private int[] voteRlt;
     private int totalVote;
     private List<PostModel> mPostList;
-    private int width;
+    private String[] answers;
     public PostListAdapter(Context hContext, List<PostModel> mPostList) {
         this.hContext = hContext;
         this.mPostList = mPostList;
@@ -68,8 +69,7 @@ public class PostListAdapter extends BaseAdapter {
 
         // from answers, create buttons and add them to options of posts
         final LinearLayout linearLayout = (LinearLayout) v.findViewById(R.id.list_options_layout);
-        width = linearLayout.getWidth();
-        String[] answers = mPostList.get(position).getArrayTextAnswer();
+        answers = mPostList.get(position).getArrayTextAnswer();
         Button[] options = new Button[answers.length];
         voteRlt = new int[answers.length];
         totalVote = mPostList.get(position).getTotalVotes();
@@ -91,11 +91,14 @@ public class PostListAdapter extends BaseAdapter {
                 public void onClick(View view) {
                     totalVote++;
                     voteRlt[fI]++;
-                    TextView[] pb = new TextView[fOptions.length];
+                    ProgressBar[] pb = new ProgressBar[fOptions.length];
+                    TextView[] rt = new TextView[fOptions.length];
                     for(int j=0;j<fOptions.length;j++){
                         fOptions[j].setVisibility(View.GONE);
                         pb[j] = createResultBar(j,fI);
+                        rt[j] = createResultText(j,fI);
                         linearLayout.addView(pb[j]);
+                        linearLayout.addView(rt[j]);
                     }
                 }
             });
@@ -135,25 +138,51 @@ public class PostListAdapter extends BaseAdapter {
         return option;
     }
 
-    public TextView createResultBar(int index, int chosen){
+    public ProgressBar createResultBar(int index, int chosen){
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        int scaleRatio = (int)(1150 * (1 - (double)voteRlt[index]/(double)totalVote));
-        layoutParams.setMargins(0, 0, 100+scaleRatio, getMarginBottom());
-        layoutParams.height = 140;
-        TextView resultBar = new TextView(hContext);
+        ProgressBar resultBar = new ProgressBar(hContext, null, android.R.attr.progressBarStyleHorizontal);
+        layoutParams.setMargins(0, 0, 200, getMarginBottom());
+        layoutParams.height = 70;
         String tag = "resultBar_" + index;
         resultBar.setTag(tag);
 
-
+        resultBar.setScaleY(3f);
         resultBar.setLayoutParams(layoutParams);
-        resultBar.setText(voteRlt[index]+"/"+totalVote);
-        resultBar.setTextColor(Color.BLACK);
         if(index == chosen) {
-            resultBar.setBackgroundColor(Color.GREEN);
+            resultBar.getProgressDrawable().setColorFilter(
+                    Color.GREEN, android.graphics.PorterDuff.Mode.SRC_IN);
         }else{
-            resultBar.setBackgroundColor(Color.RED);
+            resultBar.getProgressDrawable().setColorFilter(
+                    Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
         }
+
+        resultBar.setMax(100);
+        if(voteRlt[index] != 0) {
+            resultBar.setProgress((int) (100 * ((double) voteRlt[index] / (double) totalVote)));
+        }else{
+            resultBar.setProgress(2);
+        }
+
         return resultBar;
+    }
+    public TextView createResultText(int index, int chosen){
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        TextView rt = new TextView(hContext);
+        layoutParams.setMargins(0, 0, 200, getMarginBottom());
+        layoutParams.height = 70;
+        String tag = "resultText_" + index;
+        rt.setTag(tag);
+
+        rt.setGravity(Gravity.CENTER);
+        rt.setLayoutParams(layoutParams);
+        rt.setText(answers[index]+"     "+voteRlt[index]+"/"+totalVote);
+        if(index == chosen) {
+            rt.setTextColor(Color.GREEN);
+        }else{
+            rt.setTextColor(Color.BLACK);
+        }
+        return rt;
     }
 }
