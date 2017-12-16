@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -34,6 +35,7 @@ public class Posts extends BaseFragment {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        postsDatabaseHandler = new PostsDatabaseHandler(this.getActivity());
     }
 
     @Override
@@ -43,12 +45,15 @@ public class Posts extends BaseFragment {
 
         View rootview = inflater.inflate(R.layout.fragment_profile_posts, container, false);
         lv = rootview.findViewById(R.id.listview_mPosts);
-
+        mPosts = new ArrayList<>();
+        List<PostModel> postList = null;
         try {
-            mPosts = postsDatabaseHandler.getAllPosts();
+            postList = postsDatabaseHandler.getAllPosts();
         } catch (ParseException e) {
             e.printStackTrace();
         }
+            mPosts.addAll(postList);
+
 
         adapter = new PostListAdapter(getActivity(), mPosts);
         lv.setAdapter(adapter);

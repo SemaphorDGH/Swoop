@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -32,6 +33,7 @@ public class Pins extends BaseFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        postsDatabaseHandler = new PostsDatabaseHandler(this.getActivity());
         }
 
 
@@ -42,12 +44,17 @@ public class Pins extends BaseFragment {
 
         View rootview = inflater.inflate(R.layout.fragment_profile_pins, container, false);
         lv = rootview.findViewById(R.id.listview_mpins);
+        mPins = new ArrayList<>();
 
+        List<PostModel> postList = null;
         try {
-            mPins = postsDatabaseHandler.getAllPosts();
+            postList = postsDatabaseHandler.getAllPosts();
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
+            mPins.addAll(postList);
+
 
         adapter = new PostListAdapter(getActivity(), mPins);
         lv.setAdapter(adapter);

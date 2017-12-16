@@ -98,7 +98,7 @@ public class PostFragment extends BaseFragment{
             @Override
             public void onClick(View v) {
                 removeOption(view);
-            };
+            }
         });
 
         _post_submit_button.setOnClickListener(new View.OnClickListener() {

@@ -1,11 +1,13 @@
 package semaphor.swoop.fragments.ProfileSubFragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -38,6 +40,7 @@ public class Info extends BaseFragment{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        infoList = new ArrayList<>();
         infoList.add(new InfoModel("Name:"));
         infoList.add(new InfoModel("Birthday:"));
         infoList.add(new InfoModel("Following:"));
@@ -55,15 +58,15 @@ public class Info extends BaseFragment{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        View rootview = inflater.inflate(R.layout.fragment_profile_posts, container, false);
+        ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_profile_info, container, false);
 
-        lv = rootview.findViewById(R.id.listview_infos);
-
+        lv = view.findViewById(R.id.listview_infos);
+       // Log.d("????", String.valueOf(lv == null));
         adapter = new InfoListAdapter(getActivity(), infoList);
         lv.setAdapter(adapter);
 
         setRetainInstance(true);
-        return rootview;
+        return view;
     }
 
 

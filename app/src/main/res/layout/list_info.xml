@@ -13,7 +13,7 @@
         android:layout_alignBottom="@+id/profilePic"
         android:layout_alignParentEnd="true"
         android:layout_toEndOf="@+id/infoIconPic"
-        android:textColor="@color/bootstrap_gray"
+        android:textColor="@color/oil"
         android:textSize="24sp"
         android:textStyle="bold" />
 

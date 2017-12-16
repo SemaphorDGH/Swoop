@@ -10,7 +10,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.beardedhen.androidbootstrap.TypefaceProvider;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -31,7 +30,6 @@ public class HomeFragment extends BaseFragment {
     private ListView lv;
     private PostsDatabaseHandler postsDatabaseHandler;
 
-    int fragCount;
 
     public static HomeFragment newInstance(int instance) {
         Bundle args = new Bundle();
@@ -54,10 +52,6 @@ public class HomeFragment extends BaseFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // register for Android-Bootstrap by Bearded-Hen
-        TypefaceProvider.registerDefaultIconSets();
-        setHasOptionsMenu(true);
 
         postsDatabaseHandler = new PostsDatabaseHandler(this.getActivity());
     }
@@ -86,6 +80,7 @@ public class HomeFragment extends BaseFragment {
         }
 
         adapter = new PostListAdapter(getActivity(), posts);
+
         lv = rootView.findViewById(R.id.listview_posts);
         lv.setAdapter(adapter);
         setRetainInstance(true);
@@ -103,7 +98,7 @@ public class HomeFragment extends BaseFragment {
         });
 
 
-        ( (HomeActivity)getActivity()).updateToolbarTitle((fragCount == 0) ? "Home" : "Sub Home "+fragCount);
+        ( (HomeActivity)getActivity()).updateToolbarTitle( "Home");
 
     }
 

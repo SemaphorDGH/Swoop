@@ -1,5 +1,6 @@
 package semaphor.swoop.database;
 
+import java.security.PublicKey;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -131,13 +132,13 @@ public class PostModel {
     // Convert from formatted string to Date date
     public Date getDateByStringDate(String stringDate) throws ParseException {
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat format = new SimpleDateFormat("EEEE, MMMM d, yyyy 'at' h:mm a");
+        SimpleDateFormat format = new SimpleDateFormat("EEE, MMMM d, yyyy 'at' h:mm a");
         return format.parse(stringDate);
     }
 
     // Get date
     public String getStringDate() {
-        SimpleDateFormat format = new SimpleDateFormat("EEEE, MMMM d, yyyy 'at' h:mm a");
+        SimpleDateFormat format = new SimpleDateFormat("EEE, MMMM d, yyyy 'at' h:mm a");
         return format.format(this.date);
     }
 
@@ -176,7 +177,11 @@ public class PostModel {
         this.answers = textAnswer;
     }
 
-    private int getTotalVotes() {
+    public int[] getVoteResult(){
+        return this.votes;
+    }
+
+    public int getTotalVotes() {
         int totalVotes = 0;
         for (int i = 0; i < votes.length; i++) {
             totalVotes += votes[i];
